@@ -1,6 +1,6 @@
 #!/bin/bash
 
-workdir=""
+workdir="/home/david"
 
 if [ -z "$workdir" ]; then
     echo "Please, first configure your 'workdir' path at:"
