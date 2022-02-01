@@ -1,4 +1,10 @@
 #!/bin/bash
 
-workdir="/data/workdir"
+workdir=""
+
+if [ -z "$workdir" ]; then
+    echo "Please, first configure your 'workdir' path at:"
+    echo $(realpath ${BASH_SOURCE[0]})
+    exit
+fi
 
