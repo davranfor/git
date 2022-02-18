@@ -1,5 +1,6 @@
 #!/bin/bash
 
+myemail="mygitemail@mail.com"
 workdir="/home/david"
 
 if [ -z "$workdir" ]; then
