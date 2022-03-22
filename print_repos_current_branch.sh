@@ -18,6 +18,9 @@ fi
 find $workdir -type d -name '.git' -print0 2>/dev/null | sort -z | while read -d $'\0' folder; do
     cd $folder
     printf "$fmt " $(sed 's:.*/::' <<< ${folder::-5})
-    git rev-parse --abbrev-ref HEAD
+    # Without server name
+    # git rev-parse --abbrev-ref HEAD
+    # With server name
+    git rev-parse --abbrev-ref --symbolic-full-name @{u}
 done
 
