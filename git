@@ -1,0 +1,178 @@
+Clone repo
+==========
+git clone https://github.com/davranfor/clux.git
+
+Create branch
+=============
+# Checkout the branch where you want to start (i.e. main)
+git checkout name-of-the-starting branch
+# Update the local repos
+git pull
+# Create the branch
+git checkout -b name-of-the-new-branch
+# This is shorthand for:
+git branch name-of-the-new-branch
+git checkout name-of-the-new-branch
+# Then you can upload the changes to remote
+git push origin name-of-the-new-branch
+
+Delete branch
+=============
+git branch -d name-of-the-branch
+
+Show all branches
+=================
+git branch --list
+
+Squash commits
+==============
+git rebase -i after-this-commit
+# or
+git rebase -i HEAD~5
+# Where after-this-commit is the hash of the last commit you don't want to include (probably the HEAD)
+# or
+# 5 is the number of commits to squash starting from HEAD
+# This will open a text editor, replace "pick" on the second and subsequent commits with "squash" or "fixup"
+
+Commit
+======
+# Stage all pending changes
+git add .
+# Commit all staged changes with a message
+git commit -m "Bla bla bla"
+# In one step
+git commit -a -m "Bla bla bla"
+
+Change last commit message
+==========================
+git commit --amend
+# This will open a text editor (i.e. vim) where you can update the text
+# If the commit was already pushed
+git push --force
+
+Discard
+=======
+# Undo local change for a file
+git checkout filename 
+# Undo all local changes in the current directory (recursive)
+git checkout .
+# Undo all local changes in the current directory (recursive) (recommended)
+git restore .
+# Undo local change for a file (recommended)
+git restore file
+# Discards all changes in the working directory and staging area
+git reset --hard
+
+Undo last commit preserving local changes
+=========================================
+git reset HEAD~1
+# Do your changes on the branch and commit the new changes
+# If the commit was already pushed
+git push --force
+
+Merge
+=====
+git checkout target-branch-name
+# Update the local repos
+git pull
+# Do the merge
+git merge origin-branch-name
+# or
+git merge --no-ff origin-branch-name
+# or
+git merge --no-ff origin-branch-name -m "Message of the commit"
+# --no-ff means always create a commit for the merge
+# Then you can upload the changes to remote
+git push origin
+
+Rebase
+======
+# Integrate changes from one branch onto another (i.e. from feature to main)
+git checkout feature
+git rebase main
+
+Stash
+=====
+# Show all stashes
+git stash list
+# Save stash
+git stash push
+# Save stash including untracked files (same than -u)
+git stash push --include-untracked
+# Save stash preserving working changes
+git stash push --keep-index
+# Save stash with a title
+git stash push -m "Some title"
+# Apply the most recent stash (without deleting)
+git stash apply
+# Apply stash by id (without deleting)
+git stash apply stash${n}
+# Apply the most recent stash (deleting)
+git stash pop
+# Apply stash by id (deleting)
+git stash pop stash${n}
+# Delete the most recent stash (witout applying)
+git stash drop
+# Delete stash by id (witout applying)
+git stash drop stash${n}
+# Delete all stashes (without applying)
+git stash clear
+# Since version 2.11 you can use the N stack number instead of using stash@{n}
+
+Information
+===========
+# See changes made in a specific commit (where commit is the hash of the commit)
+git show commit
+# Once you have the matches you can view the file content at a specific commit
+git show 2e92329aae5997602fc404e808eccdf623fd0a87:src/file.c
+# Find text in previous commits
+git grep "foo" $(git rev-list --all)
+# List commits waiting to be pushed
+git cherry -v
+# Detailed information
+git log --decorate --graph --oneline -all
+# Display file names with their status 
+git log --name-status --oneline
+# Shows only commits that modified files in /path/to/folder
+git log -- /path/to/folder
+# Show current uncommited changes
+git status
+# Compare working directory vs staged changes
+git diff
+# Compare staged vs last commit
+git diff --staged
+# Shows only file names and their status
+git diff --name-status
+# You can also compare by hash, various hashes or by filename
+git diff 3f1b2c3
+git diff 3f1b2c3 5a6d7e8
+git diff file.c
+# With difftool
+git difftool 2adeca4166 /path/to/file
+# Multiple commits
+git difftool 2adeca4166 9313e6469d /path/to/file
+# Show changes with vim
+git difftool -y -t vimdiff
+# Show differences side by side 
+git difftool -d main
+
+Change settings
+===============
+# Location .git/config
+git config --global --edit
+
+Meld as git difftool
+====================
+git config --global --edit
+# Append the following: 
+[diff]
+    tool = meld
+[difftool]
+    prompt = false
+[difftool "meld"]
+    cmd = meld "$LOCAL" "$REMOTE"
+
+
+
+
+
