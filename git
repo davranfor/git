@@ -1,6 +1,8 @@
 Clone repo
 ==========
 git clone https://github.com/davranfor/clux.git
+# Recommended:
+git clone git@github.com:davranfor/clux.git
 
 Create branch
 =============
@@ -156,11 +158,6 @@ git difftool -y -t vimdiff
 # Show differences side by side 
 git difftool -d main
 
-Change settings
-===============
-# Location .git/config
-git config --global --edit
-
 Meld as git difftool
 ====================
 git config --global --edit
@@ -172,7 +169,17 @@ git config --global --edit
 [difftool "meld"]
     cmd = meld "$LOCAL" "$REMOTE"
 
+Change settings
+===============
+# Location .git/config
+git config --global --edit
 
+View user settings
+==================
+git config --global user.name
+git config --global user.email
 
-
+View all settings
+=================
+git config --list
 
