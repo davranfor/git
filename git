@@ -183,3 +183,27 @@ View all settings
 =================
 git config --list
 
+GitHub
+======
+# Configure git global settings
+git config --global user.name "David RF"
+git config --global user.email "davranfor@gmail.com"
+# Generate the RSA key
+ssh-keygen -t rsa -b 4096 -C "davranfor@gmail.com"
+# Or the ed25519 key (recommended) 
+ssh-keygen -t ed25519 -C "davranfor@gmail.com"
+# Copy the key to clipboard 
+xclip -selection clipboard < ~/.ssh/id_rsa.pub
+# or
+xclip -selection clipboard < ~/.ssh/id_ed25519.pub
+# Add the key in
+# https://github.com/settings/keys
+# Test the SSH key
+ssh -T git@github.com
+# First commit having an existing repository
+git init
+git remote add origin git@github.com:davranfor/clux.git
+git add .
+git commit -m "First commit"
+git push -u origin main --force
+
